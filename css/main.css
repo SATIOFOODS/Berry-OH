@@ -368,13 +368,30 @@ img {
    Footer
    ============================================================ */
 .site-footer {
-  display: none;
+  width: 100%;
+  text-align: center;
+  padding: 16px 24px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  margin-top: 8px;
 }
 
 .site-footer p {
-  color: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.30);
   font-size: 0.72rem;
   font-family: 'Nunito', sans-serif;
+  line-height: 1.6;
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: underline;
 }
 
 /* ============================================================
