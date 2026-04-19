@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>Berry-Oh!</title>
+  <meta name="description" content="Berry-OH! is a new UK chocolate snack inspired by viral Middle Eastern flavours. Strawberry Kunafa Crunch and OG Berry Dunker — launching September 2026. Apply to be a first tester.">
+  <meta property="og:title" content="Berry-OH! | Coming Soon — September 2026">
+  <meta property="og:description" content="A new chocolate snack inspired by viral Middle Eastern flavours. Coming to the UK September 2026.">
+  <meta property="og:image" content="assets/pouch-front.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Berry-OH! | Coming Soon">
+  <meta name="twitter:image" content="assets/pouch-front.png">
+  <link rel="canonical" href="https://berry-oh.com">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#1a0612">
+  <link rel="icon" type="image/png" href="assets/berry-oh_-removebg-preview.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+
+  <!-- Particle canvas — hidden, replaced by CSS scatter -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- SVG noise texture overlay -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- Radial spotlight glow — fixed so it always highlights the hero zone -->
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <!-- CSS scatter — lightweight positioned berry/kunafa elements -->
+  <div class="bg-scatter" aria-hidden="true">
+    <img src="assets/berry.png"  class="sc sc-b1" alt="" loading="lazy">
+    <img src="assets/berry.png"  class="sc sc-b2" alt="" loading="lazy">
+    <img src="assets/berry.png"  class="sc sc-b3" alt="" loading="lazy">
+    <img src="assets/berry.png"  class="sc sc-b4" alt="" loading="lazy">
+    <img src="assets/berry.png"  class="sc sc-b5" alt="" loading="lazy">
+    <img src="assets/berry.png"  class="sc sc-b6" alt="" loading="lazy">
+    <img src="assets/berry.png"  class="sc sc-b7" alt="" loading="lazy">
+    <img src="assets/berry.png"  class="sc sc-b8" alt="" loading="lazy">
+    <img src="assets/berry.png"  class="sc sc-b9" alt="" loading="lazy">
+    <img src="assets/berry.png"  class="sc sc-b10" alt="" loading="lazy">
+    <img src="assets/berry.png"  class="sc sc-b11" alt="" loading="lazy">
+    <img src="assets/kunafa.png" class="sc sc-k1 sc-kunafa-fix" alt="" loading="lazy">
+    <img src="assets/kunafa.png" class="sc sc-k2 sc-kunafa-fix" alt="" loading="lazy">
+    <img src="assets/kunafa.png" class="sc sc-k3 sc-kunafa-fix" alt="" loading="lazy">
+    <img src="assets/kunafa.png" class="sc sc-k4 sc-kunafa-fix" alt="" loading="lazy">
+    <img src="assets/kunafa.png" class="sc sc-k5 sc-kunafa-fix" alt="" loading="lazy">
+    <img src="assets/kunafa.png" class="sc sc-d1 sc-kunafa-fix" alt="" loading="lazy">
+    <img src="assets/kunafa.png" class="sc sc-d2 sc-kunafa-fix" alt="" loading="lazy">
+    <img src="assets/kunafa.png" class="sc sc-d3 sc-kunafa-fix" alt="" loading="lazy">
+    <img src="assets/berry.png"  class="sc sc-d4" alt="" loading="lazy">
+    <img src="assets/berry.png"  class="sc sc-d5" alt="" loading="lazy">
+    <img src="assets/kunafa.png" class="sc sc-d6 sc-kunafa-fix" alt="" loading="lazy">
+  </div>
+
+  <main class="site-main">
+
+    <!-- 1. Logo + launch date -->
+    <section class="section-logo reveal">
+      <img
+        src="assets/berry-oh_-removebg-preview.png"
+        alt="Berry-OH!"
+        class="logo"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </section>
+
+    <!-- 3. Hero — badges frame the products left and right -->
+    <section class="section-hero reveal">
+      <div class="hero-products">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <img src="assets/pouch-front.png" alt="Berry-OH! pouch" class="hero-pouch" loading="lazy">
+        <img src="assets/glossy-bite.png" alt="Berry-OH! chocolate bite" class="hero-bite" id="hero-bite" loading="eager" fetchpriority="high">
+      </div>
+      <img src="assets/og-berry-dunker.png" alt="OG Berry Dunker" class="hero-badge hero-badge--left" loading="lazy">
+      <img src="assets/strawberry-kunafa-crunch.png" alt="Strawberry Kunafa Crunch" class="hero-badge hero-badge--right" loading="lazy">
+    </section>
+
+    <!-- 4. Main heading -->
+    <section class="reveal">
+      <h1 class="main-heading">Coming to the UK - stay close.</h1>
+    </section>
+
+    <!-- 5. Clarity line -->
+    <section class="reveal">
+      <p class="clarity-line">White choc. Kunafa crunch. Hits different.</p>
+    </section>
+
+    <!-- 6. Apply subheading -->
+    <section class="reveal">
+      <p class="apply-subheading">Think you can handle it? Apply to be a Berry-OH! tester</p>
+    </section>
+
+    <!-- 7. Form -->
+    <section class="section-form reveal">
+      <div class="form-wrapper" id="form-wrapper">
+        <form class="apply-form" id="apply-form" action="https://formspree.io/f/xojylaej" method="POST" novalidate>
+          <input
+            type="text"
+            name="name"
+            id="field-name"
+            placeholder="Your Name"
+            autocomplete="name"
+            aria-label="Your Name"
+          >
+          <input
+            type="email"
+            name="email"
+            id="field-email"
+            placeholder="Email Address"
+            autocomplete="email"
+            aria-label="Email Address"
+          >
+          <input
+            type="text"
+            name="instagram"
+            id="field-instagram"
+            placeholder="Instagram Handle"
+            aria-label="Instagram Handle"
+          >
+          <button type="submit" class="btn-apply">I'M READY</button>
+        </form>
+        <p class="form-success" id="form-success" aria-live="polite">You're on the list 🍓 We'll be in touch.</p>
+      </div>
+    </section>
+
+    <!-- 8. Stock / wholesale contact -->
+    <section>
+      <p class="stock-text">
+        Want to stock Berry-OH? Email us at
+        <a href="mailto:hello@satiofoods.com" class="stock-link">hello@satiofoods.com</a>
+      </p>
+    </section>
+
+    <!-- 9. Mascot -->
+    <section class="section-mascot">
+      <div class="mascot-row">
+        <img src="assets/og-berry-dunker.png" alt="OG Berry Dunker" class="mascot-badge" loading="lazy">
+        <img src="assets/1776593547528_image.png" alt="Berry-OH! mascot" class="mascot" loading="lazy">
+        <img src="assets/strawberry-kunafa-crunch.png" alt="Strawberry Kunafa Crunch" class="mascot-badge" loading="lazy">
+      </div>
+    </section>
+
+    <!-- 10. Social line -->
+    <section>
+      <p class="social-line">
+        Follow the build on
+        <a
+          href="https://instagram.com/berryoh.uk"
+          class="social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >@BerryOh.Uk</a>
+      </p>
+    </section>
+
+  </main>
+
+  <!-- 11. Ticker tape -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track"><span class="ticker-content">STRAWBERRY KUNAFA CRUNCH · OG BERRY DUNKER · WHITE CHOC SHELL · HITS DIFFERENT · COMING TO THE UK SEPTEMBER 2026 · 75G OF PURE HYPE · BERRY-OH! · STRAWBERRY KUNAFA CRUNCH · OG BERRY DUNKER · WHITE CHOC SHELL · HITS DIFFERENT · COMING TO THE UK SEPTEMBER 2026 · 75G OF PURE HYPE · BERRY-OH! · STRAWBERRY KUNAFA CRUNCH · OG BERRY DUNKER · WHITE CHOC SHELL · HITS DIFFERENT · COMING TO THE UK SEPTEMBER 2026 · 75G OF PURE HYPE · BERRY-OH! · </span><span class="ticker-content">STRAWBERRY KUNAFA CRUNCH · OG BERRY DUNKER · WHITE CHOC SHELL · HITS DIFFERENT · COMING TO THE UK SEPTEMBER 2026 · 75G OF PURE HYPE · BERRY-OH! · STRAWBERRY KUNAFA CRUNCH · OG BERRY DUNKER · WHITE CHOC SHELL · HITS DIFFERENT · COMING TO THE UK SEPTEMBER 2026 · 75G OF PURE HYPE · BERRY-OH! · STRAWBERRY KUNAFA CRUNCH · OG BERRY DUNKER · WHITE CHOC SHELL · HITS DIFFERENT · COMING TO THE UK SEPTEMBER 2026 · 75G OF PURE HYPE · BERRY-OH! · </span></div>
+  </div>
+
+  <!-- 12. Footer -->
+  <footer class="site-footer"></footer>
+
+  <!-- Scripts — each file self-initialises at bottom of its own module -->
+  <script src="js/particles.js"></script>
+  <script src="js/parallax.js"></script>
+  <script src="js/form.js"></script>
+  <script src="js/reveal.js"></script>
+
+</body>
+</html>

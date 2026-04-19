@@ -1,0 +1,118 @@
+/* ============================================================
+   Form styles — Berry-OH! apply form
+   ============================================================ */
+
+.form-wrapper {
+  position: relative;
+  width: 100%;
+  /* min-height locked by form.js to prevent layout jump on success */
+}
+
+/* Horizontal row on desktop */
+.apply-form {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.apply-form input {
+  flex: 1;
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  color: var(--color-text);
+  padding: 14px 16px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.80rem;
+  font-weight: 400;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.apply-form input::placeholder {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+/* Focus: subtle pink border */
+.apply-form input:focus {
+  border-color: rgba(232, 52, 138, 0.40);
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.35), 0 0 0 2px rgba(232, 52, 138, 0.10);
+}
+
+.btn-apply {
+  flex-shrink: 0;
+  background: var(--color-accent);
+  color: var(--color-text);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 0.88rem;
+  letter-spacing: 0.09em;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 34px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease, filter 0.15s ease;
+  -webkit-appearance: none;
+  appearance: none;
+  box-shadow: 0 10px 30px rgba(232, 52, 138, 0.35);
+}
+
+.btn-apply:hover {
+  background: var(--color-accent-hover);
+  transform: scale(1.04);
+  filter: brightness(1.12);
+  box-shadow: 0 14px 40px rgba(232, 52, 138, 0.50);
+}
+
+.btn-apply:active {
+  transform: scale(0.97);
+  filter: brightness(0.95);
+}
+
+/* ============================================================
+   Success state — fades in after form submission
+   ============================================================ */
+.form-success {
+  display: none;
+  opacity: 0;
+  color: var(--color-text);
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.6;
+  transition: opacity 0.4s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding: 0 16px;
+}
+
+/* ============================================================
+   Mobile — stacked layout
+   ============================================================ */
+@media (max-width: 768px) {
+  .apply-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-apply {
+    width: 100%;
+    padding: 15px 28px;
+  }
+
+  .form-wrapper {
+    min-height: 220px !important;
+  }
+}

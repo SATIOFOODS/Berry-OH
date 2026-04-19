@@ -1,0 +1,80 @@
+/* ============================================================
+   All keyframe animations — Berry-OH! coming soon page
+   ============================================================ */
+
+/* Logo fade-in on page load */
+@keyframes logo-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Badge pulse — scale only, rotation handled via individual transform property */
+@keyframes badge-pulse-left {
+  0%, 100% { scale: 1; }
+  50%       { scale: 1.03; }
+}
+
+@keyframes badge-pulse-right {
+  0%, 100% { scale: 1; }
+  50%       { scale: 1.03; }
+}
+
+/* Logo left-right bounce after fade-in */
+@keyframes logo-wiggle {
+  0%   { transform: translateX(0)    rotate(0deg);    }
+  18%  { transform: translateX(-7px) rotate(-2deg);   }
+  36%  { transform: translateX(7px)  rotate(2deg);    }
+  54%  { transform: translateX(-4px) rotate(-1deg);   }
+  72%  { transform: translateX(4px)  rotate(1deg);    }
+  88%  { transform: translateX(-1px) rotate(-0.3deg); }
+  100% { transform: translateX(0)    rotate(0deg);    }
+}
+
+/* Mascot — translateY and rotate combined for simultaneous hype motion */
+@keyframes mascot-hype {
+  from { transform: translateY(0)    rotate(-3deg); }
+  to   { transform: translateY(-7px) rotate(3deg);  }
+}
+
+/* Ticker scrolling left — track is 2× content wide so loop is seamless */
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* CSS scatter float animations — use rotate: property on elements so
+   transform here is pure translation and doesn't conflict with rotation */
+@keyframes scatter-float-a {
+  0%,  100% { transform: translateY(0px)   translateX(0px);  }
+  38%        { transform: translateY(-9px)  translateX(4px);  }
+  65%        { transform: translateY(-5px)  translateX(-3px); }
+}
+
+@keyframes scatter-float-b {
+  0%,  100% { transform: translateY(0px)   translateX(0px);  }
+  30%        { transform: translateY(-6px)  translateX(-5px); }
+  60%        { transform: translateY(-11px) translateX(3px);  }
+}
+
+@keyframes scatter-float-c {
+  0%,  100% { transform: translateY(0px)   translateX(0px); }
+  50%        { transform: translateY(-8px)  translateX(6px); }
+}
+
+@keyframes scatter-float-d {
+  0%,  100% { transform: translateY(0px)  translateX(0px);  }
+  40%        { transform: translateY(8px)  translateX(3px);  }
+  72%        { transform: translateY(5px)  translateX(-2px); }
+}
+
+@keyframes scatter-float-e {
+  0%,  100% { transform: translateY(0px)  translateX(0px);   }
+  35%        { transform: translateY(-4px) translateX(-11px); }
+  68%        { transform: translateY(-7px) translateX(-5px);  }
+}

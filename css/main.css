@@ -1,0 +1,487 @@
+/* ============================================================
+   CSS Custom Properties
+   ============================================================ */
+:root {
+  --color-bg:           #2d0a1e;
+  --color-accent:       #E8348A;
+  --color-accent-hover: #c4206e;
+  --color-text:         #ffffff;
+  --color-subtext:      #F5ECD7;
+  --color-glow:         #FF6BAE;
+  --color-maroon:       #560028;
+  --color-dark:         #0d0009;
+  --color-border:       #2a2a2a;
+  --color-placeholder:  #444444;
+}
+
+/* ============================================================
+   Reset & Base
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  overflow: hidden;
+  min-height: 100vh;
+  text-align: center;
+}
+
+img {
+  display: block;
+  mix-blend-mode: screen;
+}
+
+/* ============================================================
+   Particle Canvas — star field
+   ============================================================ */
+#particles-canvas {
+  display: block;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ============================================================
+   Background — flat, no gradient
+   ============================================================ */
+.bg-glow {
+  display: none;
+}
+
+/* ============================================================
+   Noise Overlay
+   ============================================================ */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 300px 300px;
+}
+
+/* ============================================================
+   Main Layout — wider max-width to hold full hero scene
+   ============================================================ */
+.site-main {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px 20px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   Logo
+   ============================================================ */
+.section-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 207px;
+  mix-blend-mode: screen;
+  animation: logo-fade-in 0.8s ease both, logo-wiggle 8s ease-in-out 2s infinite;
+}
+
+.launch-date {
+  color: var(--color-subtext);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.09em;
+  margin-top: 2px;
+  opacity: 0.88;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.15), 0 0 16px rgba(232, 52, 138, 0.22);
+}
+
+/* ============================================================
+   Hero — column: products on top, badge-row below
+   ============================================================ */
+.section-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible;
+  width: 100%;
+  padding-top: 0px;
+  margin-top: -120px;
+  margin-bottom: 4px;
+}
+
+/* Product images wrapper */
+.hero-products {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0px;
+  flex-shrink: 0;
+}
+
+.hero-glow { display: none; }
+.hero-products::after { display: none; }
+.hero-products::before { display: none; }
+
+
+
+
+.hero-pouch {
+  position: relative;
+  z-index: 3;
+  width: 340px;
+  transform: rotate(-12deg);
+  margin-right: -32px;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.70));
+}
+
+/* Bite is the dominant element — largest thing on screen */
+.hero-bite {
+  position: relative;
+  z-index: 3;
+  width: 519px;
+  /* negative rotate tilts it slightly toward pouch */
+  transform: rotate(-5deg) translateY(-30px);
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.70));
+  will-change: transform;
+}
+
+/* Flavor badge stamps — absolute stickers overlapping the scene */
+.hero-badge {
+  position: absolute;
+  width: 110px;
+  opacity: 0.80;
+  mix-blend-mode: screen;
+  transition: scale 0.2s ease, opacity 0.2s ease;
+  animation: badge-pulse-left 3s ease-in-out infinite;
+}
+
+.hero-badge--left {
+  left: 8%;
+  top: 22%;
+  transform: rotate(-8deg);
+  z-index: 0;
+}
+
+.hero-badge--right {
+  right: 8%;
+  top: 24%;
+  transform: rotate(6deg);
+  animation-name: badge-pulse-right;
+  z-index: 0;
+}
+
+.hero-badge--left:hover,
+.hero-badge--right:hover {
+  scale: 1.08;
+  opacity: 1;
+  animation-play-state: paused;
+}
+
+/* ============================================================
+   Main Heading
+   ============================================================ */
+.main-heading {
+  font-family: 'Bangers', cursive;
+  font-size: 3.8rem;
+  font-weight: 400;
+  letter-spacing: 2.5px;
+  color: var(--color-text);
+  text-shadow:
+    0 0 28px rgba(232, 52, 138, 0.55),
+    0 0 70px rgba(232, 52, 138, 0.18),
+    0 3px 14px rgba(0, 0, 0, 0.85);
+  line-height: 1.05;
+  margin-bottom: 8px;
+}
+
+/* ============================================================
+   Clarity Line — off-white, readable, secondary to heading
+   ============================================================ */
+.clarity-line {
+  color: var(--color-subtext);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  opacity: 0.96;
+}
+
+/* ============================================================
+   Apply Subheading — pink but dialled back so it doesn't
+   overpower the heading or description
+   ============================================================ */
+.apply-subheading {
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 600;
+  color: #ff4d9e;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  letter-spacing: 0.01em;
+}
+
+/* ============================================================
+   Form Section
+   ============================================================ */
+.section-form {
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 2px;
+}
+
+/* ============================================================
+   Stock Text
+   ============================================================ */
+.stock-text {
+  color: rgba(245, 236, 215, 0.72);
+  font-size: 0.82rem;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.stock-link {
+  color: rgba(245, 236, 215, 0.72);
+  text-decoration: none;
+}
+
+.stock-link:hover {
+  color: var(--color-subtext);
+  text-decoration: underline;
+}
+
+/* ============================================================
+   Mascot row — mascot flanked by small flavor badges
+   ============================================================ */
+.section-mascot {
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+  margin-bottom: 3px;
+}
+
+.mascot-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.mascot {
+  width: 168px;
+  mix-blend-mode: screen;
+  animation: mascot-hype 1.8s ease-in-out infinite alternate;
+}
+
+.mascot-badge {
+  width: 75px;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+}
+
+/* ============================================================
+   Social Line
+   ============================================================ */
+.social-line {
+  color: rgba(245, 236, 215, 0.5);
+  font-size: 0.82rem;
+  margin-bottom: 8px;
+}
+
+.social-link {
+  color: rgba(245, 236, 215, 0.5);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.social-link:hover {
+  color: var(--color-subtext);
+  text-decoration: underline;
+}
+
+/* ============================================================
+   Ticker
+   ============================================================ */
+.ticker {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  background-color: var(--color-accent);
+  overflow: hidden;
+  padding: 9px 0;
+  white-space: nowrap;
+}
+
+.ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: ticker-scroll 28s linear infinite;
+}
+
+.ticker-content {
+  display: inline-block;
+  color: var(--color-text);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  padding-right: 0;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer {
+  display: none;
+}
+
+.site-footer p {
+  color: rgba(255, 255, 255, 0.22);
+  font-size: 0.72rem;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* ============================================================
+   Scroll Reveal
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  width: 100%;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   CSS Scatter — fixed positioned berry/kunafa depth elements
+   ============================================================ */
+.bg-scatter {
+  display: none;
+}
+
+/* Base — all scatter items; no animation by default, only key items animate */
+.sc {
+  position: absolute;
+  mix-blend-mode: screen;
+}
+
+/* ── Berries — static, no animation ── */
+.sc-b1  { width: 44px; top:  6%; left: 28%;  rotate:  23deg; opacity: 0.82; }
+.sc-b2  { width: 19px; top: 15%; right:22%;  rotate: -51deg; opacity: 0.38; filter: blur(1px); }
+.sc-b3  { width: 38px; top: 29%; left: 25%;  rotate:  67deg; opacity: 0.74; }
+.sc-b4  { width: 24px; top: 18%; left: 52%;  rotate: -33deg; opacity: 0.48; filter: blur(1px); }
+.sc-b5  { width: 48px; top:  3%; right:28%;  rotate:  11deg; opacity: 0.88; }
+.sc-b6  { width: 16px; top: 44%; right:24%;  rotate: -78deg; opacity: 0.30; filter: blur(1px); }
+.sc-b7  { width: 31px; top: 22%; left: 40%;  rotate:  47deg; opacity: 0.66; }
+.sc-b8  { width: 42px; top:  9%; left: 35%;  rotate: -19deg; opacity: 0.78; }
+.sc-b9  { width: 36px; top: 34%; right:16%;  rotate:  29deg; opacity: 0.72; }
+.sc-b10 { width: 22px; top: 50%; right:19%;  rotate: -63deg; opacity: 0.44; filter: blur(1px); }
+.sc-b11 { width: 28px; top:  7%; right:14%;  rotate:  55deg; opacity: 0.58; }
+
+/* kunafa filter: invert flips white→black (screens as transparent), hue-rotate flips inverted blue strands back to golden */
+.sc-kunafa-fix { filter: invert(1) hue-rotate(180deg) brightness(3) saturate(1.8); }
+
+/* ── Kunafa — static, no animation ── */
+.sc-k1 { width: 44px; top:  5%; left: 35%; rotate:  18deg; opacity: 0.92; }
+.sc-k2 { width: 40px; top:  5%; right:30%; rotate: -44deg; opacity: 0.90; }
+.sc-k3 { width: 38px; top: 22%; left: 32%; rotate:  70deg; opacity: 0.88; }
+.sc-k4 { width: 34px; top: 18%; right:31%; rotate: -28deg; opacity: 0.86; }
+.sc-k5 { width: 42px; top: 36%; left: 33%; rotate: 122deg; opacity: 0.90; }
+
+/* ── Dust (kunafa.png) — static ── */
+.sc-d1 { width: 32px; top: 38%; right:31%; rotate: -62deg; opacity: 0.86; }
+.sc-d2 { width: 26px; top: 13%; left: 45%; rotate:  52deg; opacity: 0.82; }
+.sc-d3 { width: 36px; top: 28%; right:33%; rotate:  14deg; opacity: 0.88; }
+.sc-d4 { width: 24px; top: 12%; left: 28%; rotate: -40deg; opacity: 0.72; }
+.sc-d5 { width: 25px; top: 38%; right:22%; rotate:  55deg; opacity: 0.68; }
+.sc-d6 { width: 28px; top: 24%; right:26%; rotate: -25deg; opacity: 0.84; }
+
+/* ============================================================
+   Mobile — 768px
+   ============================================================ */
+@media (max-width: 768px) {
+  /* Reduce scatter on mobile — keep only the most visible items */
+  .sc-b4, .sc-b6, .sc-b7, .sc-b8, .sc-k1, .sc-k3, .sc-k5 { display: none; }
+  .sc-b1 { width: 26px; }
+  .sc-b2 { width: 20px; }
+  .sc-b3 { width: 24px; }
+  .sc-b5 { width: 28px; }
+
+  .site-main { padding: 24px 16px 48px; }
+
+  /* Show both products side by side */
+  .hero-products { gap: 16px; }
+
+  .hero-pouch {
+    display: block;
+    width: 140px;
+  }
+
+  .hero-bite {
+    width: 140px;
+    transform: rotate(-4deg) translateY(-8px);
+  }
+
+  /* Badges — percentage positions, no fixed px */
+  .hero-badge { width: 70px; }
+  .hero-badge--left  { left: 2%;  top: 10%; }
+  .hero-badge--right { right: 2%; top: 10%; left: auto; }
+
+  .section-hero {
+    margin-top: 0px;
+    padding-top: 16px;
+  }
+
+  .main-heading {
+    font-size: 2.4rem;
+    letter-spacing: 1.5px;
+  }
+
+  /* Logo */
+  .logo {
+    width: 140px;
+    position: relative;
+    z-index: 10;
+    margin-bottom: 8px;
+  }
+
+  /* Mascot section */
+  .mascot { width: 80px; }
+  .mascot-badge { width: 55px; }
+}
+
+/* ============================================================
+   Small phones — 390px
+   ============================================================ */
+@media (max-width: 390px) {
+  .main-heading { font-size: 1.8rem; }
+  .hero-pouch, .hero-bite { width: 110px; }
+  .hero-badge { width: 55px; }
+}

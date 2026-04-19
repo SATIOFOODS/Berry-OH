@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://berry-oh.com/sitemap.xml
