@@ -82,7 +82,7 @@ img {
   overflow-x: hidden;
   height: 100vh;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 38px;
+  padding-bottom: calc(60px + env(safe-area-inset-bottom));
 }
 
 /* ============================================================
@@ -344,6 +344,7 @@ img {
   background-color: var(--color-accent);
   overflow: hidden;
   padding: 9px 0;
+  padding-bottom: calc(9px + env(safe-area-inset-bottom));
   white-space: nowrap;
 }
 
