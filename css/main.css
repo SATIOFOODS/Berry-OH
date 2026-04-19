@@ -82,7 +82,7 @@ img {
   overflow-x: hidden;
   height: 100vh;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: calc(60px + env(safe-area-inset-bottom));
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
 }
 
 /* ============================================================
@@ -371,7 +371,7 @@ img {
 .site-footer {
   width: 100%;
   text-align: center;
-  padding: 16px 24px 12px;
+  padding: 16px 24px 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.07);
   margin-top: 8px;
 }
