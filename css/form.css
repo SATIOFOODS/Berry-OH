@@ -104,15 +104,19 @@
 @media (max-width: 768px) {
   .apply-form {
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+  }
+
+  .apply-form input {
+    padding: 11px 14px;
   }
 
   .btn-apply {
     width: 100%;
-    padding: 15px 28px;
+    padding: 13px 28px;
   }
 
   .form-wrapper {
-    min-height: 220px !important;
+    min-height: 190px !important;
   }
 }

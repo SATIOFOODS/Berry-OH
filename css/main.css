@@ -30,7 +30,7 @@ body {
   color: var(--color-text);
   font-family: 'Nunito', sans-serif;
   font-weight: 400;
-  overflow: hidden;
+  overflow-x: hidden;
   min-height: 100vh;
   text-align: center;
 }
@@ -305,13 +305,13 @@ img {
    Social Line
    ============================================================ */
 .social-line {
-  color: rgba(245, 236, 215, 0.5);
+  color: rgba(245, 236, 215, 0.75);
   font-size: 0.82rem;
   margin-bottom: 8px;
 }
 
 .social-link {
-  color: rgba(245, 236, 215, 0.5);
+  color: rgba(245, 236, 215, 0.75);
   text-decoration: none;
   font-weight: 700;
 }
@@ -409,19 +409,19 @@ img {
 .sc-kunafa-fix { filter: invert(1) hue-rotate(180deg) brightness(3) saturate(1.8); }
 
 /* ── Kunafa — static, no animation ── */
-.sc-k1 { width: 44px; top:  5%; left: 35%; rotate:  18deg; opacity: 0.92; }
-.sc-k2 { width: 40px; top:  5%; right:30%; rotate: -44deg; opacity: 0.90; }
-.sc-k3 { width: 38px; top: 22%; left: 32%; rotate:  70deg; opacity: 0.88; }
-.sc-k4 { width: 34px; top: 18%; right:31%; rotate: -28deg; opacity: 0.86; }
-.sc-k5 { width: 42px; top: 36%; left: 33%; rotate: 122deg; opacity: 0.90; }
+.sc-k1 { width: 37px; top:  5%; left: 35%; rotate:  18deg; opacity: 0.92; }
+.sc-k2 { width: 34px; top:  5%; right:30%; rotate: -44deg; opacity: 0.90; }
+.sc-k3 { width: 32px; top: 22%; left: 32%; rotate:  70deg; opacity: 0.88; }
+.sc-k4 { width: 29px; top: 18%; right:31%; rotate: -28deg; opacity: 0.86; }
+.sc-k5 { width: 36px; top: 36%; left: 33%; rotate: 122deg; opacity: 0.90; }
 
 /* ── Dust (kunafa.png) — static ── */
-.sc-d1 { width: 32px; top: 38%; right:31%; rotate: -62deg; opacity: 0.86; }
-.sc-d2 { width: 26px; top: 13%; left: 45%; rotate:  52deg; opacity: 0.82; }
-.sc-d3 { width: 36px; top: 28%; right:33%; rotate:  14deg; opacity: 0.88; }
+.sc-d1 { width: 27px; top: 38%; right:31%; rotate: -62deg; opacity: 0.86; }
+.sc-d2 { width: 22px; top: 13%; left: 45%; rotate:  52deg; opacity: 0.82; }
+.sc-d3 { width: 31px; top: 28%; right:33%; rotate:  14deg; opacity: 0.88; }
 .sc-d4 { width: 24px; top: 12%; left: 28%; rotate: -40deg; opacity: 0.72; }
 .sc-d5 { width: 25px; top: 38%; right:22%; rotate:  55deg; opacity: 0.68; }
-.sc-d6 { width: 28px; top: 24%; right:26%; rotate: -25deg; opacity: 0.84; }
+.sc-d6 { width: 24px; top: 24%; right:26%; rotate: -25deg; opacity: 0.84; }
 
 /* ============================================================
    Mobile — 768px
