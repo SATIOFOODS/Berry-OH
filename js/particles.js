@@ -6,7 +6,7 @@
   const kunafaImg = new Image();
 
   const STAR_COUNT   = 100;
-  const BERRY_COUNT  = 15;
+  const BERRY_COUNT  = 7;
   const KUNAFA_COUNT = 8;
 
   let stars   = [];

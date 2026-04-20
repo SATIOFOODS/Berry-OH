@@ -82,7 +82,7 @@ img {
   overflow-x: hidden;
   height: 100vh;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  padding-bottom: calc(44px + env(safe-area-inset-bottom));
 }
 
 /* ============================================================
@@ -241,11 +241,12 @@ img {
    ============================================================ */
 .clarity-line {
   color: var(--color-subtext);
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.6;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.5;
   margin-bottom: 8px;
-  opacity: 0.96;
+  opacity: 1;
+  letter-spacing: 0.01em;
 }
 
 /* ============================================================
@@ -380,9 +381,9 @@ img {
 .site-footer {
   width: 100%;
   text-align: center;
-  padding: 16px 24px 20px;
+  padding: 10px 24px 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.07);
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .site-footer p {
