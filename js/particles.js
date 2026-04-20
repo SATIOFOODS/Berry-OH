@@ -1,22 +1,32 @@
 (function initCanvas() {
-  const canvas = document.getElementById('particles-canvas');
-  const ctx    = canvas.getContext('2d');
+  const canvas    = document.getElementById('particles-canvas');
+  const ctx       = canvas.getContext('2d');
 
-  const berryImg  = new Image();
-  const kunafaImg = new Image();
+  const berryImg    = new Image();
+  const kunafaImg   = new Image();
+  const whitechocImg = new Image();
 
-  const STAR_COUNT   = 100;
-  const BERRY_COUNT  = 7;
-  const KUNAFA_COUNT = 8;
+  const STAR_COUNT      = 100;
+  const BERRY_COUNT     = 7;
+  const KUNAFA_COUNT    = 8;
+  const WHITECHOC_COUNT = 5;
 
-  let stars   = [];
-  let berries = [];
-  let kunafas = [];
-  let animId  = null;
+  let stars      = [];
+  let berries    = [];
+  let kunafas    = [];
+  let whitechocs = [];
+  let animId     = null;
 
   function rand(min, max) { return Math.random() * (max - min) + min; }
 
-  /* ── Build stars (static positions, redrawn each frame cheaply) ── */
+  function edgeX() {
+    const side = Math.random() > 0.5 ? 'left' : 'right';
+    return side === 'left'
+      ? Math.random() * canvas.width * 0.20
+      : canvas.width * 0.80 + Math.random() * canvas.width * 0.20;
+  }
+
+  /* ── Build stars ── */
   function buildStars() {
     stars = [];
     for (let i = 0; i < STAR_COUNT; i++) {
@@ -63,6 +73,22 @@
         opacity: rand(0.10, 0.20),
         vx:      Math.cos(angle) * speed,
         vy:      Math.sin(angle) * speed,
+      });
+    }
+  }
+
+  /* ── Build white choc particles — edge-only spawn, downward drift ── */
+  function buildWhitechocs() {
+    whitechocs = [];
+    for (let i = 0; i < WHITECHOC_COUNT; i++) {
+      const r = rand(12, 25);
+      whitechocs.push({
+        x:       edgeX(),
+        y:       rand(0, canvas.height),
+        r:       r,
+        opacity: rand(0.55, 0.70),
+        vx:      (Math.random() - 0.5) * 0.6,
+        vy:      rand(0.4, 0.7),
       });
     }
   }
@@ -126,7 +152,15 @@
     ctx.globalCompositeOperation = 'source-over';
   }
 
-  /* ── Update positions with boundary wrap ── */
+  function drawWhitechocs() {
+    whitechocs.forEach(w => {
+      ctx.globalAlpha = w.opacity;
+      ctx.drawImage(whitechocImg, w.x - w.r, w.y - w.r, w.r * 2, w.r * 2);
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  /* ── Update positions ── */
   function update() {
     berries.forEach(b => {
       b.x += b.vx;
@@ -146,6 +180,15 @@
       if (k.y < -pad)                k.y = canvas.height + pad;
       if (k.y > canvas.height + pad) k.y = -pad;
     });
+
+    whitechocs.forEach(w => {
+      w.x += w.vx;
+      w.y += w.vy;
+      if (w.y > canvas.height + w.r) {
+        w.y = -w.r;
+        w.x = edgeX();
+      }
+    });
   }
 
   /* ── Animation loop ── */
@@ -159,6 +202,7 @@
     drawStars();
     drawBerries();
     drawKunafas();
+    drawWhitechocs();
     update();
   }
 
@@ -176,6 +220,7 @@
     buildStars();
     buildBerries();
     buildKunafas();
+    buildWhitechocs();
   }
 
   let resizeTimer;
@@ -184,12 +229,12 @@
     resizeTimer = setTimeout(resize, 200);
   });
 
-  /* ── Stars initialise immediately; loop starts only after both images load ── */
   resize();
 
   Promise.all([
-    new Promise(r => { berryImg.onload  = r; berryImg.src  = 'assets/berry.png';  }),
-    new Promise(r => { kunafaImg.onload = r; kunafaImg.src = 'assets/kunafa.png'; }),
+    new Promise(r => { berryImg.onload     = r; berryImg.src     = 'assets/berry.png';      }),
+    new Promise(r => { kunafaImg.onload    = r; kunafaImg.src    = 'assets/kunafa.png';     }),
+    new Promise(r => { whitechocImg.onload = r; whitechocImg.src = 'assets/whitechoc.png';  }),
   ]).then(() => {
     requestAnimationFrame(frame);
   });
