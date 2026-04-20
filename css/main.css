@@ -396,6 +396,15 @@ img {
   text-decoration: underline;
 }
 
+.footer-stock {
+  color: rgba(245, 236, 215, 0.50);
+  font-size: 11px;
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+  margin-top: 6px;
+  line-height: 1.6;
+}
+
 /* ============================================================
    Scroll Reveal
    ============================================================ */
@@ -516,4 +525,48 @@ img {
   .main-heading { font-size: 1.8rem; }
   .hero-pouch, .hero-bite { width: 110px; }
   .hero-badge { width: 55px; }
+}
+
+/* ============================================================
+   Mobile typography & Fibonacci spacing — 600px
+   logo → 21px → products → 13px → headline → 8px → subline
+   → 13px → hook → 21px → fields → 13px → button → 34px
+   → mascot → 21px → instagram → 55px → footer
+   ============================================================ */
+@media (max-width: 600px) {
+  /* Text hierarchy */
+  .clarity-line {
+    font-size: 0.88rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    opacity: 0.75;
+    margin-bottom: 13px;
+  }
+
+  .apply-subheading {
+    font-size: 0.75rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    opacity: 0.85;
+  }
+
+  /* Fibonacci spacing */
+  .logo { margin-bottom: 21px; }
+
+  .section-hero {
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 13px;
+  }
+
+  .main-heading { margin-bottom: 8px; }
+
+  .section-form { margin-top: 21px; }
+
+  .section-mascot {
+    margin-top: 34px;
+    margin-bottom: 21px;
+  }
+
+  .site-footer { margin-top: 55px; }
 }
