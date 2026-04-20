@@ -303,6 +303,11 @@ img {
   gap: 18px;
 }
 
+.section-mascot .social-line {
+  margin-top: 13px;
+  margin-bottom: 0;
+}
+
 .mascot {
   width: 168px;
   mix-blend-mode: screen;
@@ -578,9 +583,13 @@ img {
     margin-bottom: 21px;
   }
 
+  .mascot-row {
+    flex-shrink: 0;
+  }
+
   .section-mascot .social-line {
+    margin-top: 0;
     text-align: left;
-    margin-bottom: 0;
   }
 
   .site-footer { margin-top: 21px; }
