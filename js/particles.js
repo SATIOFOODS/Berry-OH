@@ -153,9 +153,12 @@
   }
 
   function drawWhitechocs() {
+    const isMobile = canvas.width < 600;
+    const chocW = isMobile ? 32 : 45;
+    const chocH = (whitechocImg.height / whitechocImg.width) * chocW;
     whitechocs.forEach(w => {
       ctx.globalAlpha = w.opacity;
-      ctx.drawImage(whitechocImg, w.x - w.r, w.y - w.r, w.r * 2, w.r * 2);
+      ctx.drawImage(whitechocImg, w.x, w.y, chocW, chocH);
     });
     ctx.globalAlpha = 1;
   }
