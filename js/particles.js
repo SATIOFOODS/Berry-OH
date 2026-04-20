@@ -80,11 +80,11 @@
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    const cx2 = isMobile ? canvas.width * 0.6 : canvas.width * 0.54;
+    const cx2 = isMobile ? canvas.width * 0.6 : canvas.width * 0.64;
     const cy2 = isMobile ? canvas.height * 0.22 : canvas.height * 0.28;
     const radius2 = radius * 0.65;
     const gradient2 = ctx.createRadialGradient(cx2, cy2, 0, cx2, cy2, radius2);
-    gradient2.addColorStop(0, 'rgba(200, 30, 90, 0.28)');
+    gradient2.addColorStop(0, 'rgba(200, 30, 90, 0.18)');
     gradient2.addColorStop(1, 'rgba(200, 30, 90, 0)');
     ctx.fillStyle = gradient2;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
