@@ -69,17 +69,21 @@
 
   /* ── Glow ── */
   function drawGlow() {
+    const isMobile = canvas.width < 600;
+    const radius = Math.min(canvas.width, canvas.height) * 0.6;
+
     const cx = canvas.width * 0.46;
-    const cy = canvas.height * 0.32;
-    const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, 460);
+    const cy = isMobile ? canvas.height * 0.28 : canvas.height * 0.32;
+    const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
     gradient.addColorStop(0, 'rgba(180, 20, 80, 0.28)');
     gradient.addColorStop(1, 'rgba(180, 20, 80, 0)');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    const cx2 = canvas.width * 0.62;
-    const cy2 = canvas.height * 0.28;
-    const gradient2 = ctx.createRadialGradient(cx2, cy2, 0, cx2, cy2, 220);
+    const cx2 = isMobile ? canvas.width * 0.6 : canvas.width * 0.54;
+    const cy2 = isMobile ? canvas.height * 0.22 : canvas.height * 0.28;
+    const radius2 = radius * 0.65;
+    const gradient2 = ctx.createRadialGradient(cx2, cy2, 0, cx2, cy2, radius2);
     gradient2.addColorStop(0, 'rgba(200, 30, 90, 0.20)');
     gradient2.addColorStop(1, 'rgba(200, 30, 90, 0)');
     ctx.fillStyle = gradient2;
