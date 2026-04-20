@@ -254,7 +254,7 @@
 
   Promise.all([
     new Promise(r => { berryImg.onload     = r; berryImg.src     = 'assets/berry.png';     }),
-    new Promise(r => { whitechocImg.onload = r; whitechocImg.src = 'assets/whitechoc.png'; }),
+    new Promise(r => { whitechocImg.onload = r; whitechocImg.src = 'assets/whitechoc.png?v=2'; }),
   ]).then(() => {
     requestAnimationFrame(frame);
   });
