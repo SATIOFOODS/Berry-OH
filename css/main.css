@@ -565,6 +565,8 @@ img {
 
   .site-main { padding-bottom: 8px; }
 
+  .mascot-badge { display: none; }
+
   .section-mascot {
     margin-top: 34px;
     margin-bottom: 21px;
