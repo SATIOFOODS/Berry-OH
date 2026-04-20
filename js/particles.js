@@ -1,21 +1,20 @@
 (function initCanvas() {
-  const canvas    = document.getElementById('particles-canvas');
-  const ctx       = canvas.getContext('2d');
+  const canvas       = document.getElementById('particles-canvas');
+  const ctx          = canvas.getContext('2d');
 
-  const berryImg    = new Image();
-  const kunafaImg   = new Image();
+  const berryImg     = new Image();
   const whitechocImg = new Image();
 
   const STAR_COUNT      = 100;
   const BERRY_COUNT     = 7;
-  const KUNAFA_COUNT    = 8;
   const WHITECHOC_COUNT = 5;
 
   let stars      = [];
   let berries    = [];
-  let kunafas    = [];
+  let kunafaStrands = [];
   let whitechocs = [];
   let animId     = null;
+  let kunafaTime = 0;
 
   function rand(min, max) { return Math.random() * (max - min) + min; }
 
@@ -59,25 +58,29 @@
     }
   }
 
-  /* ── Build kunafa particles ── */
-  function buildKunafas() {
-    kunafas = [];
-    for (let i = 0; i < KUNAFA_COUNT; i++) {
-      const speed = rand(0.1, 0.3);
-      const angle = rand(0, Math.PI * 2);
-      const s     = rand(22, 42);
-      kunafas.push({
-        x:       rand(0, canvas.width),
-        y:       rand(0, canvas.height),
-        size:    s,
-        opacity: rand(0.10, 0.20),
-        vx:      Math.cos(angle) * speed,
-        vy:      Math.sin(angle) * speed,
-      });
-    }
+  /* ── Build kunafa strands ── */
+  function buildKunafaStrands() {
+    const isMobile = canvas.width < 600;
+    const count    = isMobile ? 5 : 8;
+    kunafaStrands  = Array.from({ length: count }, () => {
+      const length = isMobile
+        ? rand(80, 120)
+        : rand(80, 180);
+      return {
+        x:         rand(0, canvas.width),
+        y:         rand(-length, canvas.height),
+        length,
+        amplitude: rand(6, 16),
+        frequency: rand(0.3, 0.7),
+        speed:     rand(0.4, 1.0),
+        vy:        rand(0.3, 0.7),
+        opacity:   rand(0.25, 0.45),
+        width:     rand(1.5, 2.5),
+      };
+    });
   }
 
-  /* ── Build white choc particles — edge-only spawn, downward drift ── */
+  /* ── Build white choc particles ── */
   function buildWhitechocs() {
     whitechocs = [];
     for (let i = 0; i < WHITECHOC_COUNT; i++) {
@@ -85,7 +88,7 @@
       whitechocs.push({
         x:       edgeX(),
         y:       rand(0, canvas.height),
-        r:       r,
+        r,
         opacity: rand(0.55, 0.70),
         vx:      (Math.random() - 0.5) * 0.6,
         vy:      rand(0.4, 0.7),
@@ -96,7 +99,7 @@
   /* ── Glow ── */
   function drawGlow() {
     const isMobile = canvas.width < 600;
-    const radius = Math.min(canvas.width, canvas.height) * 0.6;
+    const radius   = Math.min(canvas.width, canvas.height) * 0.6;
 
     const cx = canvas.width * 0.46;
     const cy = isMobile ? canvas.height * 0.28 : canvas.height * 0.32;
@@ -106,8 +109,8 @@
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    const cx2 = isMobile ? canvas.width * 0.6 : canvas.width * 0.64;
-    const cy2 = isMobile ? canvas.height * 0.22 : canvas.height * 0.28;
+    const cx2     = isMobile ? canvas.width * 0.6 : canvas.width * 0.64;
+    const cy2     = isMobile ? canvas.height * 0.22 : canvas.height * 0.28;
     const radius2 = radius * 0.65;
     const gradient2 = ctx.createRadialGradient(cx2, cy2, 0, cx2, cy2, radius2);
     gradient2.addColorStop(0, 'rgba(200, 30, 90, 0.18)');
@@ -116,7 +119,7 @@
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
-  /* ── Draw ── */
+  /* ── Draw stars ── */
   function drawStars() {
     stars.forEach(s => {
       ctx.beginPath();
@@ -128,6 +131,31 @@
     });
   }
 
+  /* ── Draw kunafa strands ── */
+  function drawKunafaStrand(strand, time) {
+    const segments = 24;
+    const segH     = strand.length / segments;
+
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(220, 150, 20, ${strand.opacity})`;
+    ctx.lineWidth   = strand.width;
+    ctx.lineCap     = 'round';
+    ctx.lineJoin    = 'round';
+
+    ctx.moveTo(strand.x, strand.y);
+    for (let i = 1; i <= segments; i++) {
+      const segY = strand.y + i * segH;
+      const wave = Math.sin(i * strand.frequency + time * strand.speed) * strand.amplitude;
+      ctx.lineTo(strand.x + wave, segY);
+    }
+    ctx.stroke();
+  }
+
+  function drawKunafaStrands() {
+    kunafaStrands.forEach(s => drawKunafaStrand(s, kunafaTime));
+  }
+
+  /* ── Draw berries ── */
   function drawBerries() {
     berries.forEach(b => {
       ctx.save();
@@ -141,21 +169,11 @@
     });
   }
 
-  function drawKunafas() {
-    ctx.globalCompositeOperation = 'screen';
-    kunafas.forEach(k => {
-      const size = k.size * 2;
-      ctx.globalAlpha = k.opacity;
-      ctx.drawImage(kunafaImg, k.x - k.size, k.y - k.size, size, size);
-    });
-    ctx.globalAlpha = 1;
-    ctx.globalCompositeOperation = 'source-over';
-  }
-
+  /* ── Draw white choc ── */
   function drawWhitechocs() {
     const isMobile = canvas.width < 600;
-    const chocW = isMobile ? 32 : 45;
-    const chocH = (whitechocImg.height / whitechocImg.width) * chocW;
+    const chocW    = isMobile ? 32 : 45;
+    const chocH    = (whitechocImg.height / whitechocImg.width) * chocW;
     whitechocs.forEach(w => {
       ctx.globalAlpha = w.opacity;
       ctx.drawImage(whitechocImg, w.x, w.y, chocW, chocH);
@@ -165,6 +183,16 @@
 
   /* ── Update positions ── */
   function update() {
+    kunafaTime += 0.02;
+
+    kunafaStrands.forEach(s => {
+      s.y += s.vy;
+      if (s.y > canvas.height + s.length) {
+        s.y = -s.length;
+        s.x = rand(0, canvas.width);
+      }
+    });
+
     berries.forEach(b => {
       b.x += b.vx;
       b.y += b.vy;
@@ -172,16 +200,6 @@
       if (b.x > canvas.width  + b.r) b.x = -b.r;
       if (b.y < -b.r)                b.y = canvas.height + b.r;
       if (b.y > canvas.height + b.r) b.y = -b.r;
-    });
-
-    kunafas.forEach(k => {
-      k.x += k.vx;
-      k.y += k.vy;
-      const pad = 14;
-      if (k.x < -pad)                k.x = canvas.width  + pad;
-      if (k.x > canvas.width  + pad) k.x = -pad;
-      if (k.y < -pad)                k.y = canvas.height + pad;
-      if (k.y > canvas.height + pad) k.y = -pad;
     });
 
     whitechocs.forEach(w => {
@@ -203,8 +221,8 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawGlow();
     drawStars();
+    drawKunafaStrands();  /* mid-layer — behind berries and choc */
     drawBerries();
-    drawKunafas();
     drawWhitechocs();
     update();
   }
@@ -222,7 +240,7 @@
     canvas.height = window.innerHeight;
     buildStars();
     buildBerries();
-    buildKunafas();
+    buildKunafaStrands();
     buildWhitechocs();
   }
 
@@ -235,9 +253,8 @@
   resize();
 
   Promise.all([
-    new Promise(r => { berryImg.onload     = r; berryImg.src     = 'assets/berry.png';      }),
-    new Promise(r => { kunafaImg.onload    = r; kunafaImg.src    = 'assets/kunafa.png';     }),
-    new Promise(r => { whitechocImg.onload = r; whitechocImg.src = 'assets/whitechoc.png';  }),
+    new Promise(r => { berryImg.onload     = r; berryImg.src     = 'assets/berry.png';     }),
+    new Promise(r => { whitechocImg.onload = r; whitechocImg.src = 'assets/whitechoc.png'; }),
   ]).then(() => {
     requestAnimationFrame(frame);
   });
