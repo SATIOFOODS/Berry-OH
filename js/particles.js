@@ -4,7 +4,7 @@
 
   const berryImg = new Image();
 
-  const STAR_COUNT  = 100;
+  const STAR_COUNT  = 180;
   const BERRY_COUNT = 7;
 
   let stars  = [];
@@ -17,12 +17,17 @@
   function buildStars() {
     stars = [];
     for (let i = 0; i < STAR_COUNT; i++) {
+      const bright = Math.random() > 0.8;
       stars.push({
-        x:       rand(0, canvas.width),
-        y:       rand(0, canvas.height),
-        r:       rand(0.5, 1.5),
-        opacity: rand(0.2, 0.6),
-        pink:    Math.random() > 0.72,
+        x:            rand(0, canvas.width),
+        y:            rand(0, canvas.height),
+        r:            bright ? rand(1.2, 2.5) : rand(0.4, 1.2),
+        baseOpacity:  bright ? rand(0.6, 1.0) : rand(0.2, 0.5),
+        opacity:      0,
+        phase:        rand(0, Math.PI * 2),
+        twinkleSpeed: rand(0.008, 0.025),
+        pink:         Math.random() > 0.65,
+        bright,
       });
     }
   }
@@ -72,12 +77,25 @@
   /* ── Draw stars ── */
   function drawStars() {
     stars.forEach(s => {
+      s.phase += s.twinkleSpeed;
+      s.opacity = s.baseOpacity * (0.5 + 0.5 * Math.sin(s.phase));
+
+      if (s.bright) {
+        ctx.shadowBlur  = 8;
+        ctx.shadowColor = s.pink ? 'rgba(255,160,210,0.9)' : 'rgba(255,255,255,0.9)';
+      }
+
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
       ctx.fillStyle = s.pink
-        ? `rgba(255,210,235,${s.opacity})`
+        ? `rgba(255,200,230,${s.opacity})`
         : `rgba(255,255,255,${s.opacity})`;
       ctx.fill();
+
+      if (s.bright) {
+        ctx.shadowBlur  = 0;
+        ctx.shadowColor = 'transparent';
+      }
     });
   }
 
