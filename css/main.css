@@ -161,18 +161,20 @@ img {
   z-index: 3;
   width: 700px;
   transform: none;
-  margin-right: 0;
+  margin: 0 auto;
   mix-blend-mode: screen;
   filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.70));
 }
 
 /* Bite is the dominant element — largest thing on screen */
 .hero-bite {
-  position: relative;
+  display: none;
+}
+  /*position: relative;
   z-index: 3;
   width: 519px;
   /* negative rotate tilts it slightly toward pouch */
-  transform: rotate(-5deg) translateY(-30px);
+  /*transform: rotate(-5deg) translateY(-30px);
   mix-blend-mode: screen;
   filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.70));
   will-change: transform;
@@ -489,7 +491,7 @@ img {
 
   .hero-pouch {
     display: block;
-    width: 260px;
+    width: 380px;
   }
 
   .hero-bite {
@@ -532,7 +534,7 @@ img {
    ============================================================ */
 @media (max-width: 390px) {
   .main-heading { font-size: 1.8rem; }
-  .hero-pouch, .hero-bite { width: 200px; }
+  .hero-pouch, .hero-bite { width: 280px; }
   .hero-badge { width: 55px; }
 }
 
