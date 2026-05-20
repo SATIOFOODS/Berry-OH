@@ -159,7 +159,7 @@ img {
 .hero-pouch {
   position: relative;
   z-index: 3;
-  width: 480px;
+  width: 700px;
   transform: none;
   margin-right: 0;
   mix-blend-mode: screen;
@@ -493,7 +493,9 @@ img {
   }
 
   .hero-bite {
-    width: 140px;
+    display: none;
+  }
+    /*width: 140px;
     transform: rotate(-4deg) translateY(-8px);
   }
 
