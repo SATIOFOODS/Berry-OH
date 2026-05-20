@@ -136,7 +136,7 @@ img {
   width: 100%;
   padding-top: 0px;
   margin-top: -60px;
-  margin-bottom: 4px;
+  margin-bottom: 0px;
 }
 
 /* Product images wrapper */
@@ -160,6 +160,7 @@ img {
   position: relative;
   z-index: 3;
   width: 700px;
+  max-width: 95%;
   transform: none;
   margin: 0 auto;
   mix-blend-mode: screen;
